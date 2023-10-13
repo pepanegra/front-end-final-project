@@ -31,7 +31,7 @@
       <h1>Jugadores</h1>
 
       <div class="jugadores">
-        <div class="jugador">
+        <!-- <div class="jugador">
           <img src="public/stephen curry.png" alt="" class="imgj" />
 
           <div class="divinfo">
@@ -323,60 +323,79 @@
               </div>
             </div>
           </div>
-        </div>
-
-       
+        </div> -->
       </div>
+
+      <button class="btn-dc">Crear un nuevo jugador</button>
     </main>
-    <aside>
+    <aside class="">
       <div class="formulario">
         <h1>Crear Nuevo Jugador de la NBA</h1>
         <form id="crearJugadorForm">
-          <label for="nombre">Nombre:</label>
-          <input type="text" id="nombre" name="nombre" required />
+          <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required />
+          </div>
+          <div>
+            <label for="equipo">Equipo:</label>
+            <input type="text" id="equipo" name="equipo" />
+          </div>
+          <div>
+            <label for="posicion">Posición:</label>
+            <input type="text" id="posicion" name="posicion" />
+          </div>
+          <div>
+            <label for="altura">Altura (metros):</label>
+            <input type="number" id="altura" name="altura" step="0.01" />
+          </div>
+          <div>
+            <label for="peso">Peso (kg):</label>
+            <input type="number" id="peso" name="peso" step="0.1" />
+          </div>
+          <div>
+            <label for="edad">Edad:</label>
+            <input type="number" id="edad" name="edad" />
+          </div>
+          <div>
+            <label for="nacionalidad">Nacionalidad:</label>
+            <input type="text" id="nacionalidad" name="nacionalidad" />
+          </div>
+          <div>
+            <label for="colegio">Colegio/Universidad:</label>
+            <input type="text" id="colegio" name="colegio" />
+          </div>
+          <div>
+            <label for="draft">Posición en el Draft:</label>
+            <input type="number" id="draft" name="draft" />
+          </div>
+          <div>
+            <label for="puntos">Puntos por Partido:</label>
+            <input type="number" id="puntos" name="puntos" step="0.1" />
+          </div>
+          <div>
+            <label for="rebotes">Rebotes por Partido:</label>
+            <input type="number" id="rebotes" name="rebotes" step="0.1" />
+          </div>
+          <div>
+            <label for="asistencias">Asistencias por Partido:</label>
+            <input
+              type="number"
+              id="asistencias"
+              name="asistencias"
+              step="0.1"
+            />
+          </div>
+          <div>
+            <label for="eficiencia">Eficiencia:</label>
+            <input type="number" id="eficiencia" name="eficiencia" step="0.1" />
+          </div>
 
-          <label for="equipo">Equipo:</label>
-          <input type="text" id="equipo" name="equipo" />
+          <div>
+            <label for="imagen">Imagen URL:</label>
+            <input type="text" id="imagen" name="imagen" />
+          </div>
 
-          <label for="posicion">Posición:</label>
-          <input type="text" id="posicion" name="posicion" />
-
-          <label for="altura">Altura (metros):</label>
-          <input type="number" id="altura" name="altura" step="0.01" />
-
-          <label for="peso">Peso (kg):</label>
-          <input type="number" id="peso" name="peso" step="0.1" />
-
-          <label for="edad">Edad:</label>
-          <input type="number" id="edad" name="edad" />
-
-          <label for="nacionalidad">Nacionalidad:</label>
-          <input type="text" id="nacionalidad" name="nacionalidad" />
-
-          <label for="colegio">Colegio/Universidad:</label>
-          <input type="text" id="colegio" name="colegio" />
-
-          <label for="draft">Posición en el Draft:</label>
-          <input type="number" id="draft" name="draft" />
-
-          <label for="puntos">Puntos por Partido:</label>
-          <input type="number" id="puntos" name="puntos" step="0.1" />
-
-          <label for="rebotes">Rebotes por Partido:</label>
-          <input type="number" id="rebotes" name="rebotes" step="0.1" />
-
-          <label for="asistencias">Asistencias por Partido:</label>
-          <input
-            type="number"
-            id="asistencias"
-            name="asistencias"
-            step="0.1"
-          />
-
-          <label for="eficiencia">Eficiencia:</label>
-          <input type="number" id="eficiencia" name="eficiencia" step="0.1" />
-
-          <button type="submit">Crear Jugador</button>
+          <button type="submit" class="button">Crear Jugador</button>
         </form>
       </div>
     </aside>
