@@ -239,3 +239,13 @@ aside {
     transform: translateY(0);
   }
 }
+
+.btn-borrar {
+  width: 30px;
+  background-color: #fff;
+  border: none;
+}
+
+.img-borrar {
+  width: 30px;
+}
