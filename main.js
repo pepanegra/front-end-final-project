@@ -2,12 +2,13 @@ const d = document;
 const $contenedorJugadores = d.querySelector(".jugadores");
 
 function deletePlayer() {
-  const eliminar = document.querySelectorAll(".btn-borrar");
-
+  const eliminar = document.querySelectorAll(".img-borrar");
+  console.log(eliminar);
   eliminar.forEach((cadaBtn) => {
     cadaBtn.addEventListener("click", async (evento) => {
       const elemento = evento.target.closest(".jugador");
       const id = elemento.dataset.id;
+      console.log(id);
       console.log("Presionado");
 
       try {
@@ -25,6 +26,81 @@ function deletePlayer() {
       } catch (error) {
         alert(error.message);
       }
+    });
+  });
+}
+function abririnfo() {
+  const imagen = d.querySelectorAll(".imgj");
+
+  imagen.forEach((cadaimg) => {
+    cadaimg.addEventListener("click", async (evento) => {
+      const elemento = evento.target.closest(".jugador");
+      const id = elemento.dataset.id;
+      const response = await fetch(
+        `https://mackay-cassowary-kgtq.2.us-1.fl0.io/player/${id}`
+      );
+      const jugador = await response.json();
+      const main = d.querySelector("main");
+      const $jugador = d.createElement("div");
+      $jugador.dataset.id = jugador.id;
+      $jugador.classList.add("jugador2");
+      if (!jugador.imagen) {
+        jugador.imagen =
+          "https://thumbs.dreamstime.com/b/vector-de-perfil-avatar-predeterminado-foto-usuario-redes-sociales-desconocida-icono-desconocido-en-184816085.jpg";
+      }
+      const jugadorPlantilla = `
+    
+       <img src="${jugador.imagen}" alt="${jugador.nombre}" class="imgp" />
+       <div class="divinfop">
+       <div>
+       <h2>${jugador.nombre}</h2>
+       <p>${jugador.posicion}</p>
+      <h2>${jugador.equipo}</h2>
+       </div>
+       <div class="divp">
+       <div>
+       <h3>Altura</h3>
+       <p>${jugador.altura}</p>
+       </div>
+       <div>
+             <h3>Peso</h3>
+             <p>${jugador.peso}</p>
+             </div>
+             <div>
+             <h3>Edad</h3>
+             <p>${jugador.edad}</p>
+             </div>
+             <div>
+             <h3>Draft</h3>
+             <p>${jugador.draft}</p>
+             </div>
+             </div>
+             
+            <div class="divp">
+            <div>
+            <h3>PPG</h3>
+            <p>${jugador.puntos_por_partido}</p>
+            </div>
+            <div>
+            <h3>RPG</h3>
+            <p>${jugador.rebotes_por_partido}</p>
+            </div>
+            <div>
+            <h3>APG</h3>
+            <p>${jugador.asistencias_por_partido}</p>
+            </div>
+            <div>
+            <h3>EF</h3>
+            <p>${jugador.eficiencia}</p>
+            </div>
+            </div>
+            </div>
+            <div><img src="public/basura.png" alt="Borrar" class="img-borrar" /></div> 
+            
+            `;
+
+      $jugador.innerHTML = jugadorPlantilla;
+      main.appendChild($jugador);
     });
   });
 }
@@ -46,61 +122,16 @@ async function obtenerJugadores(api) {
     
       <img src="${jugador.imagen}" alt="${jugador.nombre}" class="imgj" />
       <div class="divinfo">
-      <div>
-      <h3>${jugador.nombre}</h3>
-      <p>${jugador.posicion}</p>
-      <h3>${jugador.equipo}</h3>
-      </div>
-      <div class="divp">
-      <div>
-      <h4>Altura</h4>
-      <p>${jugador.altura}</p>
-      </div>
-      <div>
-            <h4>Peso</h4>
-            <p>${jugador.peso}</p>
-            </div>
-            <div>
-            <h4>Edad</h4>
-            <p>${jugador.edad}</p>
-            </div>
-            <div>
-            <h4>Draft</h4>
-            <p>${jugador.draft}</p>
-            </div>
-            </div>
-            
-            <div class="divp">
-            <div>
-            <h4>PPG</h4>
-            <p>${jugador.puntos_por_partido}</p>
-            </div>
-            <div>
-            <h4>RPG</h4>
-            <p>${jugador.rebotes_por_partido}</p>
-            </div>
-            <div>
-            <h4>APG</h4>
-            <p>${jugador.asistencias_por_partido}</p>
-            </div>
-            <div>
-            <h4>EF</h4>
-            <p>${jugador.eficiencia}</p>
-            </div>
-            </div>
-            </div>
-            <div><button class="btn-borrar">Borrar</button></div> 
+      
+       <h3>${jugador.nombre}</h3>
+       
+     </div>
+         
             
             `;
-      //rar<img src="public/basura.png" alt="Borrar" class="img-bor">
+
       $jugador.innerHTML = jugadorPlantilla;
       $contenedorJugadores.appendChild($jugador);
-
-      // eliminar.addEventListener("click", (e) => {
-      //   const id = e.target.parentElement.parentElement.id;
-      //   deletePlayer(id);
-      //   console.log("hola soy un boton");
-      // });
     });
   } catch (error) {
     console.log(error.message);
@@ -110,7 +141,43 @@ async function obtenerJugadores(api) {
 
 d.addEventListener("DOMContentLoaded", async () => {
   await obtenerJugadores("https://mackay-cassowary-kgtq.2.us-1.fl0.io/player");
-  deletePlayer();
+  abririnfo();
+});
+
+// delegación de eventos para el evento click
+d.addEventListener("click", async (evento) => {
+  if (evento.target.matches(".img-borrar")) {
+    const id = evento.target.parentElement.parentElement.dataset.id;
+    try {
+      const response = await fetch(
+        `https://mackay-cassowary-kgtq.2.us-1.fl0.io/player/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Personaje no se puede eliminar");
+      }
+
+      if (response.ok) {
+        document
+          .querySelectorAll(`div[data-id="${id}"]`)
+          .forEach((elemento) => elemento.remove());
+        alert("Jugador eliminado correctamente");
+      }
+    } catch (error) {
+      console.log(error);
+      alert("Jugador no se pudo eliminar");
+    }
+  }
+});
+
+// delegación de eventos para el evento submit
+d.addEventListener("submit", (evento) => {
+  if (evento.target.matches(".crearJugadorForm")) {
+    console.log(evento);
+  }
 });
 
 const btnDc = document.querySelector(".btn-dc");
@@ -161,7 +228,28 @@ btnC.addEventListener("click", async (event) => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("Respuesta exitosa:", data);
+        const jugador = data;
+        const $jugador = d.createElement("div");
+        $jugador.dataset.id = jugador.id;
+        $jugador.classList.add("jugador");
+        if (!jugador.imagen) {
+          jugador.imagen =
+            "https://thumbs.dreamstime.com/b/vector-de-perfil-avatar-predeterminado-foto-usuario-redes-sociales-desconocida-icono-desconocido-en-184816085.jpg";
+        }
+        const jugadorPlantilla = `
+    
+      <img src="${jugador.imagen}" alt="${jugador.nombre}" class="imgj" />
+      <div class="divinfo">
+      
+       <h3>${jugador.nombre}</h3>
+       
+     </div>
+         
+            
+            `;
+
+        $jugador.innerHTML = jugadorPlantilla;
+        $contenedorJugadores.appendChild($jugador);
       } else {
         console.error(
           "Error en la solicitud:",
