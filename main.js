@@ -1,34 +1,34 @@
 const d = document;
 const $contenedorJugadores = d.querySelector(".jugadores");
 
-function deletePlayer() {
-  const eliminar = document.querySelectorAll(".img-borrar");
-  console.log(eliminar);
-  eliminar.forEach((cadaBtn) => {
-    cadaBtn.addEventListener("click", async (evento) => {
-      const elemento = evento.target.closest(".jugador");
-      const id = elemento.dataset.id;
-      console.log(id);
-      console.log("Presionado");
+// function deletePlayer() {
+//   const eliminar = document.querySelectorAll(".img-borrar");
+//   console.log(eliminar);
+//   eliminar.forEach((cadaBtn) => {
+//     cadaBtn.addEventListener("click", async (evento) => {
+//       const elemento = evento.target.closest(".jugador");
+//       const id = elemento.dataset.id;
+//       console.log(id);
+//       console.log("Presionado");
 
-      try {
-        const response = await fetch(
-          `https://mackay-cassowary-kgtq.2.us-1.fl0.io/player/${id}`,
-          {
-            method: "DELETE",
-          }
-        );
+//       try {
+//         const response = await fetch(
+//           `https://mackay-cassowary-kgtq.2.us-1.fl0.io/player/${id}`,
+//           {
+//             method: "DELETE",
+//           }
+//         );
 
-        if (response.ok) {
-          elemento.remove();
-          alert("Jugador eliminado correctamente");
-        }
-      } catch (error) {
-        alert(error.message);
-      }
-    });
-  });
-}
+//         if (response.ok) {
+//           elemento.remove();
+//           alert("Jugador eliminado correctamente");
+//         }
+//       } catch (error) {
+//         alert(error.message);
+//       }
+//     });
+//   });
+// }
 function abririnfo() {
   const imagen = d.querySelectorAll(".imgj");
 
@@ -43,7 +43,7 @@ function abririnfo() {
       const main = d.querySelector("main");
       const $jugador = d.createElement("div");
       $jugador.dataset.id = jugador.id;
-      $jugador.classList.add("jugador2");
+      $jugador.classList.add("jugador2", "abrirA");
       if (!jugador.imagen) {
         jugador.imagen =
           "https://thumbs.dreamstime.com/b/vector-de-perfil-avatar-predeterminado-foto-usuario-redes-sociales-desconocida-icono-desconocido-en-184816085.jpg";
@@ -96,6 +96,7 @@ function abririnfo() {
             </div>
             </div>
             <div><img src="public/basura.png" alt="Borrar" class="img-borrar" /></div> 
+            <div class="q-info"><img src="https://cdn-icons-png.flaticon.com/512/5918/5918065.png" alt="qm" class="quitar-info" /></div> 
             
             `;
 
@@ -174,9 +175,14 @@ d.addEventListener("click", async (evento) => {
 });
 
 // delegación de eventos para el evento submit
-d.addEventListener("submit", (evento) => {
-  if (evento.target.matches(".crearJugadorForm")) {
-    console.log(evento);
+d.addEventListener("click", (evento) => {
+  if (evento.target.matches(".quitar-info")) {
+    
+    const elemento = evento.target.closest(".jugador2");
+    const id = elemento.dataset.id;
+    elemento.classList.add("jugador3");
+    console.log(id);
+    elemento.remove()
   }
 });
 
@@ -187,6 +193,12 @@ btnDc.addEventListener("click", () => {
   aside.classList.toggle("animation");
 });
 
+const quitarF = d.querySelector(".quitar-from")
+
+quitarF.addEventListener("click", () => {
+  aside.classList.toggle("animation");
+});
+
 const btnC = d.querySelector(".button");
 
 btnC.addEventListener("click", async (event) => {
@@ -194,7 +206,7 @@ btnC.addEventListener("click", async (event) => {
 
   const headersList = {
     Accept: "*/*",
-    "User-Agent": "hola",
+    "User-Agent": "Jonathan",
     "Content-Type": "application/json",
   };
 
@@ -256,6 +268,7 @@ btnC.addEventListener("click", async (event) => {
           response.status,
           response.statusText
         );
+        alert("Error en la solicitud")
       }
     } catch (error) {
       console.error("Error:", error);

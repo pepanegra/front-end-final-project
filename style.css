@@ -61,7 +61,7 @@ footer {
   align-items: center;
   justify-content: center;
   height: 10vh;
-  color: white;
+  color: #fff;
   margin-top: 30px;
 }
 
@@ -76,7 +76,7 @@ footer {
 }
 
 .jugador {
-  width: 550px;
+  width: 350px;
   display: flex;
   gap: 15px;
   justify-content: left;
@@ -84,14 +84,24 @@ footer {
   box-shadow: -1px 3px 8px 0px rgba(0, 0, 0, 0.83);
   border-radius: 10px;
   background-color: white;
-  height: 280px;
+  height: 300px;
   flex-direction: row;
 }
 
 .imgj {
-  height: 280px;
-  width: 50%;
+  height: 300px;
+  width: 100%;
   border-radius: 10px 10px 10px 10px;
+}
+
+.divinfo {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+   padding-left: 5%; 
+  
+  transition: all 1s ease-out 0s;
 }
 
 .divp {
@@ -119,6 +129,7 @@ form {
   align-items: center;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+
 }
 
 label {
@@ -162,7 +173,8 @@ aside {
   transform: translate(0, -100%);
   transition: all 0.3s ease-out;
   display: flex;
-  justify-content: center;
+  justify-content: center ;
+  align-items: center;
   color: white;
 }
 
@@ -263,7 +275,9 @@ aside {
   flex-direction: row;
   z-index: 998;
   position: fixed;
-  top: 10px;
+  top: 25%;
+
+  transition: all 2s ease-out 0s;
 }
 
 .imgp {
@@ -277,4 +291,62 @@ aside {
   flex-direction: column;
   gap: 40px;
   padding-left: 20px;
+}
+
+.abrirA {
+  -webkit-animation: abrirA 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: abrirA 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@-webkit-keyframes abrirA {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes abrirA {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.q-info {
+  width: 4%;
+  height: 100%;
+  display: flex;
+  justify-content: first baseline;
+  padding: 2% 0% 0% 0%;
+}
+ 
+.quitar-info {
+  width: 100%;
+  height: 7%;
+}
+
+.q-from {
+  width: 3%;
+  height: 100%;
+  display: flex;
+  justify-content: first baseline;
+  padding: 2% 0% 0% 0%;
+  
+  
+}
+ 
+.quitar-from {
+  width: 100%;
+  height: 5%;
 }
